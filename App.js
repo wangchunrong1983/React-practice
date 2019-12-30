@@ -219,3 +219,219 @@ render (){
     }
 
 
+// componentDidMount 
+
+import React from "react" 
+import Conditional from "./conditional"
+
+class App extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            unreadmessages:["a","b"]
+        }
+    }
+
+    componentDidMount () {
+        setTimeout(() => {
+            this.setState({
+                isloading:false
+            })
+        }, 1500);
+    }
+
+    render(){
+        return(
+        <div>
+            {this.state.unreadmessages.length>0 ? <h1>you have {this.state.unreadmessages.length} unread messages</h1> : null}
+        </div>
+        )
+    }
+}
+
+export default App
+
+
+
+
+
+class App React.Component {
+    constructor () {
+        super()
+        this.state = {
+            isLoggedIn : false
+        }
+    this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick(){
+    this.setState(prevState=>{
+        return {
+            isLoggedIn: !prevState.isLoggedIn
+        }
+    })
+
+    }
+
+    render () {
+        const buttonText = this.state.isLoggedIn ? "log out" : "log in"
+        const displayText = this.state.isLoggedIn ? "logged in" : "logged out"
+      return (
+          <div>
+              <button onclick={this.handleClick}>{buttonText}</button>
+              <h1>{displayText}</h1>
+          </div>
+      )
+    }
+}
+
+
+
+
+class App extends React.Component {
+    constructor(){
+        super()
+        this.state = {
+        loading:false
+        character: {}
+        }
+    }
+
+    componentDidMount() {
+        this.setState({loading:true})
+        fetch("http://swai/api/people/1")
+        .then(repsonse=>repsonse.json())
+        .then(data=>{
+            this.setState({
+                loading:false,
+                character:data
+            })
+        })
+
+    }
+    render() {
+        const text = this.state.loading ? "loading...":this.state.character.name
+        return (
+            <div>
+            <p>{text}</p>
+            </div>
+        )
+    }
+}
+
+
+import React from "react"
+
+class App extends React Component{
+constructor(){
+  super()
+  this.state={
+    firstName:"",
+    lastName:"",
+    isFriendly:false
+  }
+  this.handleChange = this.handleChange.bind(this)
+}
+  handleChange(event){
+    this.setState() {
+      [event.target.name] : event.target.value
+    }
+  }
+  
+  render(){
+    return(
+      <form>
+      <input type="text" onChange={this.handleChange} placeholder="first name" value ={this.state.firstName} />
+      <br />
+      <input type="text" onChange={this.handleChange} placeholder="last name" value={this.state.lastName} />
+      <h1>{this.state.firstName}</h1> <h1>{this.state.lastName}</h1>
+      <textarea value={"some text shows here"} />
+      <input type="checkbox" checked={this.state.isFriendly}
+      </form>
+    )
+  }
+}
+ReactDOM.render(<App />, document.getElementById ("root" ))
+
+
+
+import React from "react"
+
+class App extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      firstName:"",
+      lastName:"",
+      age:"",
+      gender:"",
+      destination:"",
+      isVegan:false, 
+      isKosher:false, 
+      inLactoseFree:false
+    }
+    
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  
+     handleChange(event){
+       const {name,value,type,checked} = event.target
+       this.setState({
+       [name]:checked
+     })
+     }
+     
+  
+  render(){
+    return(
+    <form >
+      <input type="text" name="firstName" placeholder="First Name" value={this.state.firstName} onChange={this.handleChange} /> </br>
+      <input type="text" name="lastName" placeholder="Last Name" value={this.state.lastName} onChange={this.handleChange} /> </br>
+      <input type="text" name="age" placeholder="age" value={this.state.age} onChange={this.handleChange} /> </br>
+
+      <label>
+       <input type="radio" name="gender" value="male" checked={this.state.gender ==== "male"} onChange={this.handleChange} /> Male
+      </label>
+</br>
+
+      <label>
+       <input type="radio" name="gender" value="female" checked={this.state.gender ==== "female"} onChange={this.handleChange} /> Female
+      </label>
+
+      <select value={this.state.destination} name="destination" onChange={this.handleChange}>
+         <option value=""> --please choose a destination-- </option>
+         <option value="germany">Germany</option>
+         <option value="norway">Norway</option>
+         <option value="the north pole">The north pole</option>
+         <option value="the south pole">The south pole</option>
+      </select>
+
+      <label>
+           <input type="checkbox" name="isVegan" onChange={this.handleChange} checked={this.state.isVegan} /> 
+       Vegan? 
+                                                                                      
+           <input type="checkbox" name="isKosher" onChange={this.handleChange} checked={this.state.isKorsher}  /> Korsher?
+             
+           <input type="checkbox" name="isLacostFree" onChange={this.handleChange} checked={this.state.isLacostFree} /> Lacost?
+      </label>
+
+
+      <button>Submit</button> 
+
+      <h1> Entered information </h1>
+      <h3> Your name:{this.state.firstName}  {this.state.lastName} </h3>
+      <h3> Your age: {this.state.age}</h3>
+      <h3> Your gender:{this.state.gender}</h3>
+      <h3> Your destination:{this.state.destination}</h3?
+      <h3> Your dietary restriction:
+           vegan:{this.state.isVegan} ? "yes" : "no"
+           kohser:{this.state.isKosher} ? "yes" :"no"
+           lactose:{this.state.isLactoseFree}? "yes" :"no"
+
+    </h3>
+       
+     </form>
+    )
+  }
+}
